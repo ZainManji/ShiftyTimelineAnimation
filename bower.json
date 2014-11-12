@@ -1,0 +1,20 @@
+{
+  "name": "yelp_animation",
+  "description": "",
+  "version": "0.0.0",
+  "main": "yelp_animation.js",
+  "ignore": [
+    "test",
+    ".jshintrc",
+    ".travis.yml",
+    "CHANGELOG.md",
+    "karma.conf.js",
+    "package.json"
+  ],
+  "devDependencies": {
+    "chai": "*"
+  },
+  "dependencies": {
+    "shifty": "~1.3.6"
+  }
+}
