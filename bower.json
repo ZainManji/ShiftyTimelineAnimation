@@ -1,8 +1,8 @@
 {
-  "name": "yelp_animation",
-  "description": "",
+  "name": "ShiftyTimelineAnimation",
+  "description": "Lightweight Timeline and Dom Tweenable library on top of Shifty",
   "version": "0.0.0",
-  "main": "yelp_animation.js",
+  "main": "animation.js",
   "ignore": [
     "test",
     ".jshintrc",
@@ -12,7 +12,7 @@
     "package.json"
   ],
   "devDependencies": {
-    "chai": "*"
+    "chai": "~1.10.0"
   },
   "dependencies": {
     "shifty": "~1.3.6"

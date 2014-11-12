@@ -8,7 +8,7 @@ var tweenable = new Tweenable({
   opacity: 0.5
 });
 
-describe('yelp_animation()', function () {
+describe('whatever()', function () {
     it('does something', function () {
         assert(true);
     });

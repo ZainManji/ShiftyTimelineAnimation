@@ -18,7 +18,7 @@ module.exports = function (config) {
     files: [
       'bower_components/chai/chai.js',
       'bower_components/shifty/dist/shifty.js',
-      'yelp_animation.js',
+      'animation.js',
       'test/**/*.js'
     ],
 
