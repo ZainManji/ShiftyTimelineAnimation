@@ -1,14 +1,17 @@
 (function (context) {
-    var tweenTimeline = function() {
+    var ShiftyTimeline = function() {
 	this.tweenableList = [];
     };
 
-    timeline.prototype.addTweenable = function(tween, pos) {
+    ShiftyTimeline.prototype.addTweenable = function(domTweenable, pos) {
 	// Add the tween object to the timeline at the position specified
+    	domTweenable.startPos = pos;
+	this.tweenableList.push(domTweenable);
     };
 
-    timeline.prototype.setTimelineFrame = function(frame) {
-
+    ShiftyTimeline.prototype.setTimelineFrame = function(frame) {
+	for (domTweenable in this.tweenableList) {
+	    domTweenable.tweenable.set(frame - domTweenable.startPos);
     };
 
     var DomTweenable = function(domElement, tweenConfig) {
@@ -19,7 +22,13 @@
 	    });
 	    step.apply(this, arguments);
 	};
-	var tweenable = new Tweenable(tweenConfig);
+	this.tweenable = new Tweenable(tweenConfig);
     };
+
+    /*
+     * @type {number}
+     */
+    DomTweenable.prototype.startPos;
+
 })(window);
 
