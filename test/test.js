@@ -2,7 +2,7 @@ var assert = chai.assert;
 
 var test = "hello";
 
-var config = {duration: 10};
+var config = {duration:10};
 var testConfig = {
     from: {opacity:0},
     to: {opacity:1},
@@ -60,9 +60,9 @@ describe('updateSubTweenables_function', function() {
 	var shiftyTimeline = new ShiftyTimeline(config);
         var domTweenable = new DomTweenable(testDomElement, testConfig);
 	shiftyTimeline.addTweenable(domTweenable, 200);
-	//shiftyTimeline.tween().pause();
-	//shiftyTimeline.seek(300).pause();
-	//assert.equal(testDomElement.style.opacity, 0.1);
+	shiftyTimeline.tween().pause();
+	shiftyTimeline.seek(300).pause();
+	assert.equal(testDomElement.style.opacity, 0.1);
 
 
 

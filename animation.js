@@ -14,8 +14,9 @@
 
     var ShiftyTimeline = function(tweenConfig) {
 	this.tweenableList = [];
-        tweenConfig.step = function(state, obj, frame) {
-	    this._updateSubtweenables(frame);
+        var self = this;
+	tweenConfig.step = function(state, obj, frame) {
+	    self._updateSubtweenables(frame);
 	}
     	this.tweenConfig = tweenConfig;
 	Tweenable.call(this, {}, tweenConfig);
@@ -50,9 +51,19 @@
 	}
     };
 
-    ShiftyTimeline.prototype._updateSubtweenables = function(timeline, frame) {
+    ShiftyTimeline.prototype._updateSubtweenables = function(frame) {
 	this.tweenableList.forEach(function(timelineObj) {
-	    timelineObj.tweenable.seek(frame - timelineObj.startPos);
+	    var tweenFrame;
+	    if (frame - timelineObj.startPos < 0) {
+		tweenFrame = 0
+	    } else if (frame > timelineObj.tweenable._duration + timelineObj.startPos) {
+		tweenFrame = timelineObj.tweenable._duration + timelineObj.startPos;
+	    } else {
+		tweenFrame = frame - timelineObj.startPos;
+ 	    }
+
+	    timelineObj.tweenable.tween().pause();
+	    timelineObj.tweenable.seek(tweenFrame);
 	});
     };
 
