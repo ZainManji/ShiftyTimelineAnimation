@@ -35,13 +35,13 @@ describe('Timeline', function () {
 
       assert.equal(tl.tweenableList.length, 1);
       assert.equal(tl._duration, 1200);
-      assert.equal(tl.tweenableList[0].startPos, 200);
+      assert.equal(tl.tweenableList[0].delay, 200);
 
       var newDomTweenable = new DomTweenable(this.el, this.newConfig);
       tl.add(newDomTweenable, 300);
       assert.equal(tl.tweenableList.length, 2);
       assert.equal(tl._duration, 1200);
-      assert.equal(tl.tweenableList[1].startPos, 300);
+      assert.equal(tl.tweenableList[1].delay, 300);
     });
   });
 
