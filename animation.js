@@ -2,8 +2,8 @@
     var ShiftyTimeline = function(tweenConfig) {
 	this.tweenableList = [];
 	tweenConfig.duration = 0;
-        tweenConfig.step = function(state) {
-//	    this._updateSubtweenables(state);
+        tweenConfig.step = function(state, obj, frame) {
+	    this._updateSubtweenables(frame);
 	}
     	this.tweenConfig = tweenConfig;
 	Tweenable.call(this, {}, tweenConfig);
@@ -20,7 +20,7 @@
 	}
     };
 
-    ShiftyTimeline.prototype.update = function(frame) {
+    ShiftyTimeline.prototype._updateSubtweenables = function(frame) {
 	this.tweenableList.forEach(function(timelineObj) {
 	    timelineObj.tweenable.seek(frame - timelineObj.startPos);
 	});

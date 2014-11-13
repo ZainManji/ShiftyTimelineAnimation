@@ -8,7 +8,7 @@ var testConfig = {
     to: {opacity:1},
     duration: 1000,
     step: function (state) {
-    	console.log(state);
+    	//console.log(state);
     }
 };
 
@@ -32,15 +32,24 @@ describe('timeline_constructor', function() {
 });
 
 
+// Test the ShiftyTimeline addTweenable function
+describe('addTweenable_function', function() {
+    it('addedTweenable', function() {
+	var shiftyTimeline = new ShiftyTimeline(config);
+
+    });
+
+});
+
+
 // Test the DomTweenable constructor
 describe('dom_tweenable_constructor', function() {
     it('domTweenable_created', function() {
-	//var domTweenable = new DomTweenable(testDomElement, testConfig);
+	var domTweenable = new DomTweenable(testDomElement, testConfig);
 
 	var tweenable = new Tweenable({}, testConfig);
 	tweenable.tween().pause();	
-	tweenable.seek(300).pause();	
-//console.log(tweenable.seek(20).pause()._currentState);	
+	tweenable.seek(450);	
 
     });
 });
