@@ -1,9 +1,9 @@
 {
-  "name": "yelp_animation",
-  "description": "",
+  "name": "ShiftyTimelineAnimation",
+  "description": "Lightweight Timeline and Dom Tweenable library on top of Shifty",
   "version": "0.0.0",
   "devDependencies": {
-    "karma": "~0.10.1",
+    "karma": "~0.12.1",
     "karma-mocha": "~0.1.0",
     "karma-chrome-launcher": "~0.1.0",
     "karma-ie-launcher": "~0.1.1",
@@ -12,6 +12,6 @@
     "karma-safari-launcher": "~0.1.1"
   },
   "scripts": {
-    "test": "./node_modules/.bin/karma start --browsers Firefox --single-run"
+    "test": "./node_modules/karma/bin/karma start --browsers PhantomJS,Firefox --single-run"
   }
 }

@@ -55,9 +55,4 @@ describe('dom_tweenable_constructor', function() {
 
 //Test calling set on a DomTweenable object
 
-describe('yelp_animation()', function () {
-    it('does something', function () {
-        assert(true);
-    });
 
-});
