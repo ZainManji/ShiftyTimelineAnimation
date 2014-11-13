@@ -1,17 +1,30 @@
 (function (context) {
-    var ShiftyTimeline = function() {
+    var ShiftyTimeline = function(tweenConfig) {
 	this.tweenableList = [];
+	tweenConfig.duration = maxDuration;
+        tweenConfig.step = function() {
+	    var frame = this.get();
+	    this._updateSubtweenables(frame);
+	}
+    	this.tweenConfig = tweenConfig;
+	Tweenable.call(this, tweenConfig);
     };
 
     ShiftyTimeline.prototype.addTweenable = function(domTweenable, pos) {
 	// Add the tween object to the timeline at the position specified
-    	domTweenable.startPos = pos;
-	this.tweenableList.push(domTweenable);
+    	
+	this.tweenableList.push({tweenable : domTweenable, startPos : pos});
+    	var tweenDuration = domTweenable.tweenConfig.duration + pos;
+	if (tweenDuration > this.tweenConfig.duration) {
+	    this.tweenConfig.duration = tweenDuration; 
+	    this.setConfig(this.tweenConfig);
+	}
     };
 
-    ShiftyTimeline.prototype.setTimelineFrame = function(frame) {
-	for (domTweenable in this.tweenableList) {
-	    domTweenable.tweenable.set(frame - domTweenable.startPos);
+    ShiftyTimeline.prototype._updateSubtweenables = function(frame) {
+	this.tweenableList.forEach(function(timelineObj) {
+	    timelineObj.tweenable.set(frame - timelineObj.startPos);
+	});
     };
 
     var DomTweenable = function(domElement, tweenConfig) {
@@ -22,13 +35,27 @@
 	    });
 	    step.apply(this, arguments);
 	};
-	this.tweenable = new Tweenable(tweenConfig);
+	this.tweenConfig = tweenConfig;
+	Tweenable.call(this, tweenConfig);
     };
 
-    /*
-     * @type {number}
-     */
-    DomTweenable.prototype.startPos;
+    ShiftyTimeline.prototype = Object.create(Tweenable.prototype, {
+	constructor: {
+            value: ShiftyTimeline,
+            enumerable: false,
+            writable: true,
+            configurable: true
+        }
+    });
+
+    DomTweenable.prototype = Object.create(Tweenable.prototype, {
+	constructor: {
+     	    value: DomTweenable,
+            enumerable: false,
+            writable: true,
+            configurable: true
+        }
+    });
 
 })(window);
 
