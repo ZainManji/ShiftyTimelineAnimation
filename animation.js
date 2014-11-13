@@ -50,7 +50,7 @@
 	}
     };
 
-    ShiftyTimeline.prototype._updateSubtweenables = function(frame) {
+    ShiftyTimeline.prototype._updateSubtweenables = function(timeline, frame) {
 	this.tweenableList.forEach(function(timelineObj) {
 	    timelineObj.tweenable.seek(frame - timelineObj.startPos);
 	});

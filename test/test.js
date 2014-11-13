@@ -12,6 +12,12 @@ var testConfig = {
     }
 };
 
+var newTestConfig = {
+    from: {opacity:1},
+    to: {opacity:0},
+    duration: 700,
+};
+
 var testDomElement = document.createElement('div');
 
 // Test the ShiftyTimeline constructor
@@ -32,18 +38,20 @@ describe('addTweenable_function', function() {
 	var domTweenable = new DomTweenable(testDomElement, testConfig);
        	assert.equal(shiftyTimeline._duration, 10);
 	assert.equal(shiftyTimeline.tweenableList.length, 0);	
-	console.log(shiftyTimeline.addTweenable);
 	shiftyTimeline.addTweenable(domTweenable, 200);	
     	
-	//assert.equal(shiftyTimeline.tweenableList.length, 1);
-	//assert.equal(shiftyTimeline.duration, 1200);
-	//assert.equal(shiftyTimeline.tweenableList[0].startPos, 200);	
+	assert.equal(shiftyTimeline.tweenableList.length, 1);
+	assert.equal(shiftyTimeline._duration, 1200);
+	assert.equal(shiftyTimeline.tweenableList[0].startPos, 200);	
 
-
+	var newDomTweenable = new DomTweenable(testDomElement, newTestConfig);
+	shiftyTimeline.addTweenable(newDomTweenable, 300);
+	assert.equal(shiftyTimeline.tweenableList.length, 2);
+	assert.equal(shiftyTimeline._duration, 1200);
+	assert.equal(shiftyTimeline.tweenableList[1].startPos, 300);
     });
 
 });
-
 
 
 //Test the ShiftyTimeline updateSubTweenables Function
@@ -51,8 +59,9 @@ describe('updateSubTweenables_function', function() {
     it('updateSubtweenables', function() {
 	var shiftyTimeline = new ShiftyTimeline(config);
         var domTweenable = new DomTweenable(testDomElement, testConfig);
-	//shiftyTimeline.addTweenable(domTweenable, 200);
-	//shiftyTimeline.seek(300).pause();;
+	shiftyTimeline.addTweenable(domTweenable, 200);
+	//shiftyTimeline.tween().pause();
+	//shiftyTimeline.seek(300).pause();
 	//assert.equal(testDomElement.style.opacity, 0.1);
 
 
@@ -65,10 +74,9 @@ describe('updateSubTweenables_function', function() {
 describe('dom_tweenable_constructor', function() {
     it('domTweenable_created', function() {
 	var domTweenable = new DomTweenable(testDomElement, testConfig);
-
-	var tweenable = new Tweenable({}, testConfig);
-	tweenable.tween().pause();	
-	tweenable.seek(450).pause();	
+	domTweenable.tween().pause();
+	//domTweenable.seek(250);
+	//assert.equal(testDomElement.style.opacity, 0.25);
 
     });
 });
