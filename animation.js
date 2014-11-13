@@ -1,7 +1,7 @@
 (function (context) {
     var ShiftyTimeline = function(tweenConfig) {
 	this.tweenableList = [];
-	tweenConfig.duration = maxDuration;
+	tweenConfig.duration = 0;
         tweenConfig.step = function() {
 	    var frame = this.get();
 	    this._updateSubtweenables(frame);
