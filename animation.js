@@ -2,12 +2,11 @@
     var ShiftyTimeline = function(tweenConfig) {
 	this.tweenableList = [];
 	tweenConfig.duration = 0;
-        tweenConfig.step = function() {
-	    var frame = this.get();
-	    this._updateSubtweenables(frame);
+        tweenConfig.step = function(state) {
+//	    this._updateSubtweenables(state);
 	}
     	this.tweenConfig = tweenConfig;
-	Tweenable.call(this, tweenConfig);
+	Tweenable.call(this, {}, tweenConfig);
     };
 
     ShiftyTimeline.prototype.addTweenable = function(domTweenable, pos) {
@@ -21,22 +20,23 @@
 	}
     };
 
-    ShiftyTimeline.prototype._updateSubtweenables = function(frame) {
+    ShiftyTimeline.prototype.update = function(frame) {
 	this.tweenableList.forEach(function(timelineObj) {
-	    timelineObj.tweenable.set(frame - timelineObj.startPos);
+	    timelineObj.tweenable.seek(frame - timelineObj.startPos);
 	});
     };
 
     var DomTweenable = function(domElement, tweenConfig) {
 	var step = tweenConfig.step || function() {};
-	tweenConfig.step = function(properties) {
-	    Object.keys(properties).forEach(function (key) {
-		domElement.style[key] = prop[key];
+	tweenConfig.step = function(state) {
+	    console.log(state);
+	    Object.keys(state).forEach(function (key) {
+		domElement.style[key] = state[key];
 	    });
 	    step.apply(this, arguments);
 	};
 	this.tweenConfig = tweenConfig;
-	Tweenable.call(this, tweenConfig);
+	Tweenable.call(this, {}, tweenConfig);
     };
 
     ShiftyTimeline.prototype = Object.create(Tweenable.prototype, {
@@ -59,6 +59,5 @@
 
     exports.DomTweenable = DomTweenable;
     exports.ShiftyTimeline = ShiftyTimeline;
-
 })(this);
 
