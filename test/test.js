@@ -2,6 +2,8 @@ var assert = chai.assert;
 
 var test = "hello";
 
+var shiftyTimeline = new ShiftyTimeline();
+
 var tweenable = new Tweenable({
   x: 50,
   y: 100,
