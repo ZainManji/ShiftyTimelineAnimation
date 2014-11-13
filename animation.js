@@ -1,73 +1,84 @@
 (function (exports) {
-    var DomTweenable = function(domElement, tweenConfig) {
-	var step = tweenConfig.step || function() {};
-	tweenConfig.step = function(state) {
-	    console.log(state);
-	    Object.keys(state).forEach(function (key) {
-		domElement.style[key] = state[key];
-	    });
-	    step.apply(this, arguments);
-	};
-	this.tweenConfig = tweenConfig;
-	Tweenable.call(this, {}, tweenConfig);
-    };
+  'use strict';
 
-    var ShiftyTimeline = function(tweenConfig) {
-	this.tweenableList = [];
-        var self = this;
-	tweenConfig.step = function(state, obj, frame) {
-	    self._updateSubtweenables(frame);
-	}
-    	this.tweenConfig = tweenConfig;
-	Tweenable.call(this, {}, tweenConfig);
+  /**
+   * DomTweenable is Tweenable object applying the style property to a DOM node.
+   * @param {Element} domElement  HTMLElement or SVGElement
+   * @param {Object} tweenConfig Tween configuration as per Shifty
+   */
+  var DomTweenable = exports.DomTweenable = function(domElement, tweenConfig) {
+    var step = tweenConfig.step || function() {};
+    tweenConfig.step = function(state) {
+      Object.keys(state).forEach(function (key) {
+        domElement.style[key] = state[key];
+      });
+      step.apply(this, arguments);
     };
+    this.tweenConfig = tweenConfig;
+    Tweenable.call(this, {}, tweenConfig);
+  };
 
-    ShiftyTimeline.prototype = Object.create(Tweenable.prototype, {
-	constructor: {
-            value: ShiftyTimeline,
-            enumerable: false,
-            writable: true,
-            configurable: true
-        }
+  DomTweenable.prototype = Object.create(Tweenable.prototype, {
+    constructor: {
+      value: DomTweenable,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+
+  /**
+   * Timeline is Tweenable instance able to contains sub tweens who'll
+   * start at a specified delay.
+   * @param {Object} tweenConfig Tween configuration as per Shifty
+   */
+  var Timeline = exports.Timeline = function(tweenConfig) {
+    this.tweenableList = [];
+    this.tweenConfig = tweenConfig || {};
+    tweenConfig.step = function(state, obj, frame) {
+      this._updateSubtweenables(frame);
+    }.bind(this);
+    Tweenable.call(this, {}, tweenConfig);
+  };
+
+  Timeline.prototype = Object.create(Tweenable.prototype, {
+    constructor: {
+      value: Timeline,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+
+  /**
+   * Register a sub tween on the timeline
+   * @param {Tweenable} tweenable A Tweenable instance
+   * @param {Number} delay        Delay after which the tween should start
+   */
+  Timeline.prototype.add = function(tweenable, delay) {
+    delay = delay || 0;
+
+    this.tweenableList.push({ tweenable: tweenable, delay: delay });
+
+    var tweenDuration = tweenable.tweenConfig.duration + delay;
+    if (tweenDuration > this.tweenConfig.duration) {
+      this.tweenConfig.duration = tweenDuration;
+      this.setConfig(this.tweenConfig);
+    }
+  };
+
+  Timeline.prototype._updateSubtweenables = function(frame) {
+    this.tweenableList.forEach(function(timelineObj) {
+      var tweenFrame;
+      if (frame - timelineObj.delay < 0) {
+        tweenFrame = 0;
+      } else if (frame > timelineObj.tweenable._duration + timelineObj.delay) {
+        tweenFrame = timelineObj.tweenable._duration + timelineObj.delay;
+      } else {
+        tweenFrame = frame - timelineObj.delay;
+      }
+
+      timelineObj.tweenable.seek(tweenFrame);
     });
-
-    DomTweenable.prototype = Object.create(Tweenable.prototype, {
-	constructor: {
-     	    value: DomTweenable,
-            enumerable: false,
-            writable: true,
-            configurable: true
-        }
-    });
-
-    ShiftyTimeline.prototype.addTweenable = function(domTweenable, pos) {
-	// Add the tween object to the timeline at the position specified
-    	
-	this.tweenableList.push({tweenable : domTweenable, startPos : pos});
-    	var tweenDuration = domTweenable.tweenConfig.duration + pos;
-	if (tweenDuration > this.tweenConfig.duration) {
-	    this.tweenConfig.duration = tweenDuration; 
-	    this.setConfig(this.tweenConfig);
-	}
-    };
-
-    ShiftyTimeline.prototype._updateSubtweenables = function(frame) {
-	this.tweenableList.forEach(function(timelineObj) {
-	    var tweenFrame;
-	    if (frame - timelineObj.startPos < 0) {
-		tweenFrame = 0
-	    } else if (frame > timelineObj.tweenable._duration + timelineObj.startPos) {
-		tweenFrame = timelineObj.tweenable._duration + timelineObj.startPos;
-	    } else {
-		tweenFrame = frame - timelineObj.startPos;
- 	    }
-
-	    timelineObj.tweenable.tween().pause();
-	    timelineObj.tweenable.seek(tweenFrame);
-	});
-    };
-
-    exports.DomTweenable = DomTweenable;
-    exports.ShiftyTimeline = ShiftyTimeline;
+  };
 })(this);
-

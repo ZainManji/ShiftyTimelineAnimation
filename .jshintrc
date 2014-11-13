@@ -1,8 +1,5 @@
 {
     "browser": true,
-    "node": true,
-    "es5": true,
-    "esnext": true,
     "bitwise": false,
     "curly": false,
     "eqeqeq": true,
@@ -16,5 +13,15 @@
     "strict": true,
     "trailing": true,
     "smarttabs": true,
-    "white": true
+    "white": true,
+    "globalstrict": true,
+    "globals": {
+        "it": true,
+        "describe": true,
+        "beforeEach": true,
+        "chai": true,
+        "Timeline": true,
+        "DomTweenable": true,
+        "Tweenable": true
+    }
 }
