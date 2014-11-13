@@ -1,4 +1,4 @@
-(function (context) {
+(function (exports) {
     var ShiftyTimeline = function(tweenConfig) {
 	this.tweenableList = [];
 	tweenConfig.duration = 0;
@@ -57,5 +57,8 @@
         }
     });
 
-})(window);
+    exports.DomTweenable = DomTweenable;
+    exports.ShiftyTimeline = ShiftyTimeline;
+
+})(this);
 
