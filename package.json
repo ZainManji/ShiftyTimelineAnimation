@@ -12,6 +12,6 @@
     "karma-safari-launcher": "~0.1.1"
   },
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start --browsers PhantomJS Firefox --single-run"
+    "test": "./node_modules/karma/bin/karma start --browsers PhantomJS,Firefox --single-run"
   }
 }
