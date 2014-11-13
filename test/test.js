@@ -32,7 +32,8 @@ describe('addTweenable_function', function() {
 	var domTweenable = new DomTweenable(testDomElement, testConfig);
        	assert.equal(shiftyTimeline._duration, 10);
 	assert.equal(shiftyTimeline.tweenableList.length, 0);	
-//shiftyTimeline.addTweenable(domTweenable, 200);	
+	console.log(shiftyTimeline.addTweenable);
+	shiftyTimeline.addTweenable(domTweenable, 200);	
     	
 	//assert.equal(shiftyTimeline.tweenableList.length, 1);
 	//assert.equal(shiftyTimeline.duration, 1200);
