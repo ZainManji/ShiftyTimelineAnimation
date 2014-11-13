@@ -1,7 +1,6 @@
 (function (exports) {
     var ShiftyTimeline = function(tweenConfig) {
 	this.tweenableList = [];
-	tweenConfig.duration = 0;
         tweenConfig.step = function(state, obj, frame) {
 	    this._updateSubtweenables(frame);
 	}
