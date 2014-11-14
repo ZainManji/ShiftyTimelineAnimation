@@ -10,9 +10,7 @@ module.exports = function (config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
-    frameworks: [
-      'mocha'
-    ],
+    frameworks: ['mocha'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -22,10 +20,14 @@ module.exports = function (config) {
       'test/**/*.js'
     ],
 
+    preprocessors: {
+      'animation.js': ['coverage']
+    },
+
     // use dots reporter, as travis terminal does not support escaping sequences
     // possible values: 'dots', 'progress', 'junit', 'teamcity'
     // CLI --reporters progress
-    reporters: ['dots'],
+    reporters: ['dots', 'coverage', 'coveralls'],
 
     // enable / disable watching file and executing tests whenever any file changes
     // CLI --auto-watch --no-auto-watch
@@ -48,11 +50,20 @@ module.exports = function (config) {
 
     plugins: [
       'karma-mocha',
-      'karma-requirejs',
+      'karma-coverage',
+      'karma-coveralls',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-ie-launcher',
       'karma-safari-launcher'
-    ]
+    ],
+
+    coverageReporter: {
+      reporters:[
+        {type: 'lcov', dir:'coverage/'},
+        {type: 'text'},
+        {type: 'text-summary'},
+      ],
+    }
   });
 };
