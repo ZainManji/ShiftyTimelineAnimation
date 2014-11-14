@@ -2,39 +2,7 @@
 
 Lightweight Timeline and Dom Tweenable library on top of [Shifty](https://github.com/jeremyckahn/shifty).
 
-## Example Usage
-```javascript
-// Create a tween config
-var tweenConfig = {
-      from: {opacity:0},
-      to: {opacity:1},
-      duration: 1000
-    };
-    
-// Create a DomTweenable object so that when tweening, the css properties from the tween config
-// get applied to the attached DOM Element.
-var element = document.getElementById('#header'); //Arbitrary DOM Element
-var domTweenable = new DomTweenable(element, tweenConfig);
-
-// Move the state of the animation to the 400ms point in the tween's timeline. The CSS properties at this
-// moment get applied to the DOM Element
-domTweenable.seek(400);
-
-// Create a Tweenable Timeline to store and tween amongst 1 or more DomTweenables
-var timelineConfig = {duration: 200}; //arbitary duration
-var timeline = new Timeline(timelineConfig);
-
-// Add the DomTweenable to the timeline at the 300ms position.
-timeline.add(domTweenable, 300);
-
-// Move the pointer on the timeline to the 400ms position and update the DomTweenable objects state.
-// In this example, the DomTweenable object's state will be moved to the 100ms mark and the CSS
-// properties in the DomTweenable's tween will be applied to the element. (400ms - 300ms = 100ms)
-timeline.seek(400);
-
-```
-
-## API
+## Documentation
 
 Both the DomTweenable object and the Timeline object extend from Shifty's Tweenable.
 [Shifty's API](http://jeremyckahn.github.io/shifty/dist/doc/classes/Tweenable.html)
@@ -42,22 +10,45 @@ Both the DomTweenable object and the Timeline object extend from Shifty's Tweena
 #### DomTweenable(DOMElement, config)
 Constructor for a DomTweenable object.<br>
 Takes as param a DOM Element and a tween config.
+```javascript
+// When tweening, the css properties from the tween config get applied to the attached DOM Element.
+var domTweenable = new DomTweenable(
+                        document.getElementById('#header'),
+                        {from: {opacity:0}, to: {opacity:1}, duration: 1000}
+                  );
+```
 
 #### DomTweenable.seek(millisecond)
 Move the state of the animation to a specific point in the DomTweenable tween's timeline.<br>
 The CSS properties at the specified point will be applied to the DomElement.
+```javascript
+// Move the state of the animation to the 400ms point in the tween's timeline and apply CSS properties.
+domTweenable.seek(400);
+```
 
 #### Timeline(config)
 Constructor for a Timeline object.<br>
 Takes as param a config (optional). 
+```javascript
+// Create a timeline to place DomTweenable objects on.
+var timeline = new Timeline({duration: 200});
+```
 
 #### Timeline.add(DomTweenable, millisecond)
 Add a DomTweenable object to the Timeline at a specific point in the Timeline.<br>
 The DomTweenable tween will start at the specified position
+```javascript
+// Add the DomTweenable to the timeline at the 300ms position.
+timeline.add(domTweenable, 300);
+```
 
 #### Timeline.seek(millisecond)
 Move the current state to a specific point in the Timeline tween's timeline. <br>
 For each DomTweenable intersecting at the point, apply the CSS properties in the DomTweenable's tween to it's respective DOM element.
+```javascript
+// Move the pointer on the timeline to the 400ms position and update the Timeline's DomTweenable objects state.
+timeline.seek(400);
+```
 
 ## Testing
 
