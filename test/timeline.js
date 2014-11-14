@@ -53,6 +53,10 @@ describe('Timeline', function () {
       tl.tween().pause();
       tl.seek(300).pause();
       assert.equal(this.el.style.opacity, 0.1);
+      tl.seek(600);
+      assert.equal(this.el.style.opacity, 0.4);
+      tl.seek(1400);
+      assert.equal(this.el.style.opacity, 1); 
     });
   });
 });
