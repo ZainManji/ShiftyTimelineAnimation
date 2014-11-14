@@ -4,7 +4,9 @@ Lightweight Timeline and Dom Tweenable library on top of [Shifty](https://github
 
 ## API
 
-<h5>Create a DomTweenable instance in order to animate a DOM Element according to the specified tween config. Pass in an DOM Element and a tween config to the constructor.</h5>
+<h5>Create a DomTweenable instance in order to animate a DOM Element according to the specified tween config.</h5>
+
+Pass in an DOM Element and a tween config to the constructor.
 
 ```javascript
 var tweenConfig = {
@@ -27,7 +29,9 @@ domTweenable.seek(frame);
 ```
 
 <h5>Create a Timeline instance in order to store your DomTweenable instances. </h5>
-A Timeline will allow you to animate multiple DomTweenable objects according to their respective tweens and where you decide to place them on the Timeline. Pass in a tween config to the constructor.
+A Timeline will allow you to animate multiple DomTweenable objects according to their respective tweens and where you decide to place them on the Timeline. 
+
+Pass in a tween config to the constructor.
 
 ```javascript
 var tweenConfig = {duration: 200}; //The timeline's tween duration will adjust to fit in all the DomTweenable objects, which will be stored. If you pass in an empty config, the duration will default to 500ms.
