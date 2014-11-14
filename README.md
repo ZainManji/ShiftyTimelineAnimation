@@ -22,7 +22,8 @@ var domTweenable = new DomTweenable(
 Move the state of the animation to a specific point in the DomTweenable tween's timeline.<br>
 The CSS properties at the specified point will be applied to the DomElement.
 ```javascript
-// Move the state of the animation to the 400ms point in the tween's timeline and apply CSS properties.
+// Move the state of the animation to the 400ms point in the tween's timeline 
+// and apply CSS properties.
 domTweenable.seek(400);
 ```
 
@@ -46,7 +47,8 @@ timeline.add(domTweenable, 300);
 Move the current state to a specific point in the Timeline tween's timeline. <br>
 For each DomTweenable intersecting at the point, apply the CSS properties in the DomTweenable's tween to it's respective DOM element.
 ```javascript
-// Move the pointer on the timeline to the 400ms position and update the Timeline's DomTweenable objects state.
+// Move the pointer on the timeline to the 400ms position and 
+// update the Timeline's DomTweenable objects state.
 timeline.seek(400);
 ```
 
