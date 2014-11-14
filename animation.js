@@ -72,8 +72,6 @@
       var tweenFrame;
       if (frame - timelineObj.delay < 0) {
         tweenFrame = 0;
-      } else if (frame > timelineObj.tweenable._duration + timelineObj.delay) {
-        tweenFrame = timelineObj.tweenable._duration + timelineObj.delay;
       } else {
         tweenFrame = frame - timelineObj.delay;
       }
