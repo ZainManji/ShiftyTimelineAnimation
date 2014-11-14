@@ -69,14 +69,7 @@
 
   Timeline.prototype._updateSubtweenables = function(frame) {
     this.tweenableList.forEach(function(timelineObj) {
-      var tweenFrame;
-      if (frame - timelineObj.delay < 0) {
-        tweenFrame = 0;
-      } else {
-        tweenFrame = frame - timelineObj.delay;
-      }
-
-      timelineObj.tweenable.seek(tweenFrame);
+      timelineObj.tweenable.seek(frame - timelineObj.delay);
     });
   };
 })(this);
