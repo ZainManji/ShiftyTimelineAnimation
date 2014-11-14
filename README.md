@@ -4,9 +4,6 @@ Lightweight Timeline and Dom Tweenable library on top of [Shifty](https://github
 
 ## API
 
-ShiftyTimelineAnimation is built on top of Shifty.
-Please refer to https://github.com/jeremyckahn/shifty for more information regarding Tweenable objects.
-
 <h5>First create a DomTweenable instance. Pass in an DOM Element and a tween config to the constructor.</h5>
 
 ```javascript
