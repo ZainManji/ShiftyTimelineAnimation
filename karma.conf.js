@@ -55,7 +55,8 @@ module.exports = function (config) {
       'karma-chrome-launcher',
       'karma-firefox-launcher',
       'karma-ie-launcher',
-      'karma-safari-launcher'
+      'karma-safari-launcher',
+      'karma-phantomjs-launcher'
     ],
 
     coverageReporter: {

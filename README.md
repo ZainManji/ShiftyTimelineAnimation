@@ -1,4 +1,4 @@
-# ShiftyTimelineAnimation [![Build Status](https://secure.travis-ci.org/ZainManji/ShiftyTimelineAnimation.svg?branch=master)](http://travis-ci.org/ZainManji/ShiftyTimelineAnimation)
+# ShiftyTimelineAnimation [![Build Status](https://secure.travis-ci.org/ZainManji/ShiftyTimelineAnimation.svg?branch=master)](http://travis-ci.org/ZainManji/ShiftyTimelineAnimation) [![Coverage Status](https://coveralls.io/repos/ZainManji/ShiftyTimelineAnimation/badge.png)](https://coveralls.io/r/ZainManji/ShiftyTimelineAnimation)
 
 Lightweight Timeline and Dom Tweenable library on top of [Shifty](https://github.com/jeremyckahn/shifty).
 
