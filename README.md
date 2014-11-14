@@ -36,6 +36,28 @@ timeline.seek(400);
 
 ## API
 
+Both the DomTweenable object and the Timeline object extend from Shifty's Tweenable.
+[Shifty's API](http://jeremyckahn.github.io/shifty/dist/doc/classes/Tweenable.html)
+
+#### DomTweenable(DOMElement, config)
+Constructor for a DomTweenable object.
+Takes as param a DOM Element and a tween config.
+
+#### DomTweenable.seek(millisecond)
+Move the state of the animation to a specific point in the DomTweenable tween's timeline. The CSS properties
+at the specified point will be applied to the DomElement.
+
+#### Timeline(config)
+Constructor for a Timeline object.
+Takes as param a config (optional). 
+
+#### Timeline.add(DomTweenable, millisecond)
+Add a DomTweenable object to the Timeline at a specific point in the Timeline. The DomTweenable tween will
+start at the specified position
+
+#### Timeline.seek(millisecond)
+Move the current state to a specific point in the Timeline tween's timeline. For each DomTweenable intersecting
+at the point, apply the CSS properties in the DomTweenable's tween to it's respective DOM element.
 
 ## Testing
 
