@@ -2,56 +2,39 @@
 
 Lightweight Timeline and Dom Tweenable library on top of [Shifty](https://github.com/jeremyckahn/shifty).
 
-## API
-
-<h5>Create a DomTweenable instance in order to animate a DOM Element according to the specified tween config.</h5>
-
-Pass in an DOM Element and a tween config to the constructor.
-
+## Example Usage
 ```javascript
+// Create a tween config
 var tweenConfig = {
       from: {opacity:0},
       to: {opacity:1},
       duration: 1000
     };
+    
+// Create a DomTweenable object so that when tweening, the css properties from the tween config
+// get applied to the attached DOM Element.
 var element = document.getElementById('#header'); //Arbitrary DOM Element
 var domTweenable = new DomTweenable(element, tweenConfig);
+
+// Move the state of the animation to the 400ms point in the tween's timeline. The CSS properties at this
+// moment get applied to the DOM Element
+domTweenable.seek(400);
+
+// Create a Tweenable Timeline to store and tween amongst 1 or more DomTweenables
+var timelineConfig = {duration: 200}; //arbitary duration
+var timeline = new Timeline(timelineConfig);
+
+// Add the DomTweenable to the timeline at the 300ms position.
+timeline.add(domTweenable, 300);
+
+// Move the pointer on the timeline to the 400ms position and update the DomTweenable objects state.
+// In this example, the DomTweenable object's state will be moved to the 100ms mark and the CSS
+// properties in the DomTweenable's tween will be applied to the element. (400ms - 300ms = 100ms)
+timeline.seek(400);
+
 ```
 
-A DomTweenable object has the following functions available to it plus the default functions extended from
-the Tweenable object from Shifty.js:
-
-```javascript
-// This function moves the state of the animation to a specific point in the tween's timeline.
-// When the function moves the state, the CSS properties at that specific 
-// point in the tween's timeline will be applied to the DOM Element
-domTweenable.seek(frame);
-```
-
-<h5>Create a Timeline instance in order to store your DomTweenable instances. </h5>
-A Timeline will allow you to animate multiple DomTweenable objects according to their respective tweens and where you decide to place them on the Timeline. 
-
-Pass in a tween config to the constructor.
-
-```javascript
-var tweenConfig = {duration: 200}; //The timeline's tween duration will adjust to fit in all the DomTweenable objects, which will be stored. If you pass in an empty config, the duration will default to 500ms.
-var timeline = new Timeline(tweenConfig);
-```
-
-A Timeline object has the following functions available to use:
-
-```javascript
-// This function adds a DomTweenable object to a ShiftyTimeline.
-// domTweenableObject is an instance of a DomTweenable object, and startPos is at what start position you want
-// to place the DomTweenable object on the ShiftyTimeline.
-timeline.add(domTweenableObject, startPos);
-
-// This function seeks the timeline to the frame number specified. For the DomTweenable objects which run
-// through that frame number, there CSS style is updated according to the properties specified in their respective 
-// tween config
-// frame is a number which represents the millisecond to seek to.
-timeline.seek(frame);
-```
+## API
 
 
 ## Testing
